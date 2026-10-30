@@ -16,6 +16,8 @@ coverage/
 test-results/
 playwright-report/
 node_modules/
+__pycache__/
+*.pyc
 
 # Original material archives and local packaging
 materials-source/

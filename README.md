@@ -13,6 +13,14 @@
 - 三卷通过后按 30 / 50 / 20 权重生成成绩，并可导出 CSV。
 - 规则提示助手、演示进度载入和演示学员信息设置。
 
+## 在其他电脑获取与使用
+
+可使用同一 ChatGPT 账号访问私密下载页，下载含代码与全部素材的 ZIP：
+
+https://jijing-case-training-1029.awakenova12.chatgpt.site/download.html
+
+完整解压后，可直接用现代浏览器打开 `dist/index.html` 基本离线体验；需要继续开发时，用编辑器或智能体打开整个项目文件夹。代码与素材可随包携带，浏览器中保存的学员信息、训练进度和历史成绩不会自动同步。若浏览器限制本地文件的存储或加载，可使用下方静态服务器方式。
+
 ## 本地运行
 
 这是无构建步骤的静态网页，不需要安装前端依赖。在项目目录运行：
@@ -28,8 +36,9 @@ python -m http.server 8931 --bind 127.0.0.1 --directory dist
 需要 Node.js 运行核心逻辑测试：
 
 ```sh
-node --test tests/core.test.cjs
+node --test tests/core.test.cjs tests/download.test.cjs
 node --check dist/app.js
+python -B -m unittest discover -s tests -p "test_*.py"
 ```
 
 ## 目录
@@ -42,7 +51,12 @@ dist/
   core.js                   校验、评分及目录操作纯函数
   materials-data.js         材料清单与参考答案
   assets/materials/         材料、缩略图和封面
+  download.html             独立源码下载页
+  download-core.js          下载清单、完整性校验与合并
+  source-page.js            下载页交互
+  downloads/                发布时生成的下载文件
 tests/core.test.cjs          核心行为测试
+scripts/package_source.py   源码备份与下载文件生成
 docs/demo-design.md         Demo 设计与规则说明
 .openai/hosting.json         现有私密演示站点的部署配置
 ```
@@ -60,3 +74,5 @@ docs/demo-design.md         Demo 设计与规则说明
 仓库包含用户提供的教学模拟材料及配套参考答案，用于该训练项目。未附加开源授权；素材的进一步分发与使用范围由权利人决定。原始 RAR、未压缩源资料和学生导出成绩不在本项目仓库内。
 
 `.openai/hosting.json` 含现有站点的项目标识，不含访问凭据。复制项目建立独立部署时，应替换为新部署的配置。
+
+需要更新站点上的源码备份时，运行 `python -B scripts/package_source.py`。源码 ZIP 生成在项目的上一级目录；发布用下载文件生成在 `dist/downloads/`。源码 ZIP 会排除这些生成文件、Git 历史、凭据和本地成绩。

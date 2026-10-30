@@ -1,0 +1,29 @@
+{
+  "version": "2026-10-30",
+  "filename": "case-training-demo-source.zip",
+  "size": 51321953,
+  "sha256": "d0cdab265586322014f5c84e6d46440b9df1c544fd5308298b795ceee3134e9c",
+  "fileCount": 168,
+  "parts": [
+    {
+      "url": "downloads/source-01.part",
+      "size": 16777216,
+      "sha256": "522e566c72142ab7c23bcb4e035541f8428e31a92c758c21a6faa920a835ed2a"
+    },
+    {
+      "url": "downloads/source-02.part",
+      "size": 16777216,
+      "sha256": "ca276d98a75b2362f8085c3acb4e590ec1461360876622148738628cc173a8ab"
+    },
+    {
+      "url": "downloads/source-03.part",
+      "size": 16777216,
+      "sha256": "a28b6b4c03e251e041e7de843daee3479588e3b3bb7a38176d118bd7bb58101d"
+    },
+    {
+      "url": "downloads/source-04.part",
+      "size": 990305,
+      "sha256": "e7182adfffbc84cca6c675f5d521b1e6e96ecb6ececdfba3a83106e7aeed5707"
+    }
+  ]
+}
