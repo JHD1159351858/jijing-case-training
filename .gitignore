@@ -1,0 +1,32 @@
+# Local credentials and environment configuration
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+.openai/*credential*
+.openai/*secret*
+
+# Browser exports and local runtime output
+*.csv
+*.log
+*.tmp
+*.bak
+coverage/
+test-results/
+playwright-report/
+node_modules/
+
+# Original material archives and local packaging
+materials-source/
+*.rar
+*.zip
+*.tar
+*.tar.gz
+
+# Editor and operating-system state
+.DS_Store
+Thumbs.db
+Desktop.ini
+.idea/
+.vscode/
