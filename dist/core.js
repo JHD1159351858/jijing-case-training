@@ -63,8 +63,8 @@
     var total = 0;
     for (var i = 0; i < keys.length; i += 1) {
       var result = results[keys[i]];
-      if (!result || result.passed !== true || !Number.isFinite(result.rate) ||
-          result.rate < 0.6 || result.rate > 1) return null;
+      if (!result || !Number.isFinite(result.rate) ||
+          result.rate < 0 || result.rate > 1) return null;
       output[keys[i]] = result.rate * weights[i];
       total += output[keys[i]];
     }

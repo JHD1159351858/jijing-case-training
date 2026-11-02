@@ -102,16 +102,32 @@ test('full scores sum to 100 once without applying the weights twice', () => {
   });
 });
 
-test('scoring requires all three volumes to be present and passing', () => {
+test('scoring requires all three calculated results', () => {
   const full = { rate: 1, passed: true };
   assert.equal(invoke('score', { litigation: full, evidence: full }), null);
-  assert.equal(invoke('score', { litigation: full, evidence: full, work: { rate: 0.4, passed: false } }), null);
   assert.equal(invoke('score', null), null);
 });
 
-test('scoring rejects inconsistent or non-finite passing records', () => {
+test('scores are available before every volume reaches the preview threshold', () => {
+  const expected = ['a', 'b', 'c', 'd', 'e'];
+  const partial = invoke('validateVolume', ['a'], expected, 5);
+  const full = invoke('validateVolume', expected, expected, 5);
+  assert.equal(partial.passed, false);
+  assert.deepEqual(invoke('score', { litigation: partial, evidence: full, work: full }), {
+    litigation: 6, evidence: 50, work: 20, total: 76,
+  });
+});
+
+test('empty training shows zero scores without a validation click', () => {
+  const empty = invoke('validateVolume', [], ['a'], 1);
+  assert.deepEqual(invoke('score', { litigation: empty, evidence: empty, work: empty }), {
+    litigation: 0, evidence: 0, work: 0, total: 0,
+  });
+});
+
+test('scoring rejects out-of-range or non-finite rates', () => {
   const full = { rate: 1, passed: true };
-  for (const rate of [0.59, 1.2, NaN, Infinity]) {
+  for (const rate of [-0.01, 1.2, NaN, Infinity]) {
     assert.equal(invoke('score', { litigation: full, evidence: full, work: { rate, passed: true } }), null);
   }
 });
